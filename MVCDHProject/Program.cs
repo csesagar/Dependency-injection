@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using MVCDHProject.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -5,6 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ICustomerDAL, CustomerXmlDAL>();
+builder.Services.AddDbContext<MVCCoreDbContext>(options =>
+options.UseSqlServer(builder.Configuration.GetConnectionString("ConStr")));
 
 var app = builder.Build();
 
